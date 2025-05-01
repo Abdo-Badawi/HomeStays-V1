@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Profile</title>
+  <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
+
+  <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+    <h3 class="text-center mb-4">Update Profile</h3>
+    
+    <div id="successAlert" class="alert alert-success d-none" role="alert">
+      Update successful!
+    </div>
+
+    <form id="updateForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" class="form-control" id="country" placeholder="Enter your country" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">New Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter new password" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Update</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('updateForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const alertBox = document.getElementById('successAlert');
+      alertBox.classList.remove('d-none');
+
+      setTimeout(() => {
+        alertBox.classList.add('d-none');
+        window.location.href = 'login.html'; // redirect to login page
+      }, 3000); // show alert for 3 seconds
+    });
+  </script>
+
+  <script src="bootstrap.min.js"></script>
+</body>
+</html>
