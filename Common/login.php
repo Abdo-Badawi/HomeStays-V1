@@ -1,3 +1,40 @@
+<?php 
+include_once '../Controllers/AuthController.php';
+include_once '../Models/User.php';
+use Models\User;
+$errMsg = "";
+if(isset($_POST['email']) && isset($_POST['password'])) {
+    if(!empty($_POST['email']) && !empty($_POST['password'])){
+        $user = new User($_POST['email'], $_POST['password']);
+        $auth = new AuthController();
+        if(!$auth->login($user)){
+            if(isset($_SESSION['email'])){
+                session_start();
+            }
+            $errMsg=$_SESSION['errMsg'];
+        }
+        else {
+            if(isset($_SESSION['email'])){
+                session_start();
+            }
+            if($_SESSION['userType'] == 'traveler'){
+                header("Location: ../Traveler/index.php");
+            }
+            else if($_SESSION['userType'] == 'host'){
+                header("Location: ../Host/index.php");
+            }
+            else if($_SESSION['userType'] == 'admin'){
+                header("Location: ../Admin/index.php");
+            }
+        }
+    }
+    else {
+        $errMsg = "Please fill in all fields";
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,17 +130,28 @@
                             <h5 class="section-title text-center text-primary text-uppercase">Welcome Back</h5>
                             <h2 class="mb-3">Login to <span class="text-primary text-uppercase">HomeStays</span></h2>
                         </div>
-                        <form>
+
+                        <?php 
+                            if($errMsg != ""){
+                        ?>
+						<div class="alert alert-danger" role="alert">
+							Invalid email or password!
+						</div> 
+                        <?php 
+                        }
+                        ?>
+
+                        <form action="login.php" method="post">
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="Your Email" required>
                                         <label for="email">Your Email</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="password" class="form-control" id="password" placeholder="Your Password">
+                                        <input type="password" name="password" class="form-control" id="password" placeholder="Your Password" required>
                                         <label for="password">Your Password</label>
                                     </div>
                                 </div>
