@@ -33,15 +33,12 @@ CREATE TABLE IF NOT EXISTS traveler (
 CREATE TABLE IF NOT EXISTS host (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
   host_id VARCHAR(255) NOT NULL UNIQUE,
-  property_type ENUM('apartment', 'farm', 'house', 'other'),
-  max_guests INT,
-  language_spoken TEXT,
+  property_type ENUM('teaching', 'farming', 'cooking', 'childcare'),
   preferred_language VARCHAR(255),
   joined_date DATE,
   bio TEXT,
   rate FLOAT,
   location VARCHAR(255),
-  created_at DATE,
   status ENUM('active', 'reported'),
   FOREIGN KEY (host_id) REFERENCES users(user_id)
 );
