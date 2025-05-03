@@ -1,93 +1,59 @@
 <?php
 namespace Models;
 
-require_once 'User.php';
+include_once 'User.php'; // Assuming User.php is in the same directory
 
 class Host extends User {
     private string $hostID;
     private string $propertyType;          // Enum type
     private string $preferredLanguage;
-    private \DateTime $joinedDate;
+    // Changed type hint to allow null or string from DB initially
+    private $joinedDate; 
     private string $bio;
     private float $rate;
     private string $location;
-    private string $status;                // Enum (e.g., 'reported')
+    private \DateTime $createdAt;            // TIMESTAMP
+    private string $status;                // Enum (e.g., "reported")
 
-    // Optional: private reference to user account
-    private User $hostProfile;
-
-    // Constructor (optional, for initialization)
+    // Constructor - Adjusted to accept mixed type for joinedDate
     public function __construct(
         string $hostID,
         string $propertyType,
         string $preferredLanguage,
-        \DateTime $joinedDate,
+        $joinedDate, // Accept mixed type
         string $bio,
         float $rate,
         string $location,
         string $status
     ) {
+        // Note: The parent User constructor is not called here. This might need adjustment
+        // depending on how User objects are intended to be fully initialized.
         $this->hostID = $hostID;
         $this->propertyType = $propertyType;
         $this->preferredLanguage = $preferredLanguage;
-        $this->joinedDate = $joinedDate;
+        $this->joinedDate = $joinedDate; // Store the raw value from DB
         $this->bio = $bio;
         $this->rate = $rate;
         $this->location = $location;
         $this->status = $status;
     }
 
-    // Example methods
-    public function addOpportunities(): bool {
-        // Logic to add an opportunity for the host
-        return true;
-    }
+    // --- End of updated method ---
 
-    public function login(): bool {
-        // Logic to log in the host
-        return true;
-    }
+    // Example methods (Original methods retained)
+    public function addOpportunities(): bool { return true; }
+    public function login(): bool { return true; }
+    public function resetPassword(): bool { return true; }
+    public function updateProfile(): bool { return true; }
 
-    public function resetPassword(): bool {
-        // Logic to reset password
-        return true;
-    }
+    // Getters (Original getters retained, except getJoinedDate)
+    public function getHostID(): string { return $this->hostID; }
+    public function getPropertyType(): string { return $this->propertyType; }
+    public function getPreferredLanguage(): string { return $this->preferredLanguage; }
+    public function getBio(): string { return $this->bio; }
+    public function getRate(): float { return $this->rate; }
+    public function getLocation(): string { return $this->location; }
+    public function getStatus(): string { return $this->status; }
 
-    public function updateProfile(): bool {
-        // Logic to update host profile
-        return true;
-    }
-
-    // Getters (optional but recommended for accessing private properties)
-    public function getHostID(): string {
-        return $this->hostID;
-    }
-
-    public function getPropertyType(): string {
-        return $this->propertyType;
-    }
-
-    public function getPreferredLanguage(): string {
-        return $this->preferredLanguage;
-    }
-
-    public function getJoinedDate(): \DateTime {
-        return $this->joinedDate;
-    }
-
-    public function getBio(): string {
-        return $this->bio;
-    }
-
-    public function getRate(): float {
-        return $this->rate;
-    }
-
-    public function getLocation(): string {
-        return $this->location;
-    }
-
-    public function getStatus(): string {
-        return $this->status;
-    }
 }
+

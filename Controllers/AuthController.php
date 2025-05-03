@@ -8,8 +8,10 @@ include_once '../Controllers/DBController.php';
         public function login(User $user){
             $this->db = new DBController();
             if($this->db->openConnection()){
-                $query = "SELECT * FROM users WHERE email = '".$user->getEmail()."' AND password = '".$user->getPassword()."'";
-                $result = $this->db->select($query);    
+                $query = "SELECT * FROM users WHERE email = ? AND password = ?";
+                $params = [$user->getEmail(), $user->getPassword()];
+                $result = $this->db->selectPrepared($query, "ss", $params);
+   
                 if($result === false){
                     echo "Error in query";
                     return false;
