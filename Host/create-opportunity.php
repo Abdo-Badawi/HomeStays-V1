@@ -80,6 +80,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Create a new Opportunity object
             $startDate = new DateTime($fields['start_date']);
             $endDate = new DateTime($fields['end_date']);
+            
+            // Dynamically set hostId from the session
+            $hostId = $_SESSION['userID'] ?? null;
+            if (!$hostId) {
+                $_SESSION['opportunity_error'] = "You must be logged in to create an opportunity.";
+                header("Location: create-opportunity.php");
+                exit();
+            }
+
             $opportunity = new Opportunity(
                 $fields['title'], 
                 $fields['description'], 
@@ -91,11 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $fields['requirements']
             );
             
-            // Set created_at already done in the constructor
-            
-            // Set a valid host ID (you may want to get this from the session)
-            // This assumes the host's user ID is stored in the session
-            $opportunity->setHostId($_SESSION['user_id'] ?? '1');
+            // Set hostId dynamically from the session
+            $opportunity->setHostId($hostId);
 
             // Save opportunity to DB using OpportunityController
             $controller = new OpportunityController();
@@ -119,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

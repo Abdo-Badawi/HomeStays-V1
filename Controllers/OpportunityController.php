@@ -61,7 +61,7 @@ class OpportunityController {
                     new \DateTime($row['end_date']),
                     $row['category'],
                     $row['opportunity_photo'],
-                    $row['requirements']
+                    $row['requirements'],
                 );
                 
                 $opportunity->setId($row['opportunity_id']);
@@ -113,10 +113,15 @@ class OpportunityController {
     }
     
     // Function to get opportunities by host ID
-    public function getOpportunitiesByHostId(string $host_id): array {
-        $sql = "SELECT * FROM opportunity WHERE host_id = '$host_id' ORDER BY created_at DESC";
-        return $this->db->select($sql) ?: [];
+    public function getOpportunitiesByHostID($hostID) {
+        $query = "SELECT * FROM opportunity WHERE host_id = ?";
+        $params = [$hostID];
+        $this->db->openConnection();
+        $result = $this->db->selectPrepared($query, "i", $params);
+        $this->db->closeConnection();
+        return $result;
     }
+    
     
     // Function to get opportunities by category
     public function getOpportunitiesByCategory(string $category): array {
