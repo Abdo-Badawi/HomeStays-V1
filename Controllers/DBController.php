@@ -5,6 +5,7 @@
         private $dbPass = "";
         private $dbName = "homestay";
         private $conn;
+
         public function openConnection() {
              $this->conn = new mysqli($this->dbHost, $this->dbUser, $this->dbPass, $this->dbName);
              if ($this->conn->connect_error) {
@@ -14,7 +15,7 @@
                 return $this->conn;
              }
         }
-
+        
         public function closeConnection() {
             if ($this->conn) {
                 $this->conn->close();
@@ -23,7 +24,7 @@
                 echo "No connection to close";
             }
         }
-
+        
         public function select($query) {
             $result = $this->conn->query($query);
             if ($result) {
@@ -33,5 +34,16 @@
                 return false;
             }
         }
+        
+        public function insert(string $query, string $types, array $params): bool {
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) return false;
+            
+            $stmt->bind_param($types, ...$params);
+            $result = $stmt->execute();
+            $stmt->close();
+            return $result;
+        }
+                
     }
 ?>
