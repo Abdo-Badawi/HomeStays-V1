@@ -3,7 +3,7 @@ namespace Models;
 
 // No dependencies
 class User {
-    private string $userID = ''; // Initialize with a default value
+    private string $userID;
     private string $nationalID;
     private string $email;
     private string $password;
@@ -12,15 +12,10 @@ class User {
     private string $lastName;
     private string $phoneNumber;
     private string $profilePicture; // Assuming this is a file path or URL
-    private string $gender; // New property for gender
-    private string $birthday; // New property for birthday
-    private ?string $propertyType = null; // For hosts
-    private ?string $preferredLanguage = null; // Common for both
-    private ?string $bio = null; // Common for both
-    private ?string $location = null; // Common for both
-    private ?string $skills = null; // For travelers
-    private ?string $languageSpoken = null; // For travelers
-
+    private string $createdAt; // Assuming this is a timestamp
+    private string $gender;
+    private string $dateOfBirth; // Assuming this is a date string
+    
     public function __construct(string $email, string $password) {
         $this->email = $email;
         $this->password = $password;
@@ -73,38 +68,6 @@ class User {
         $this->profilePicture = $profilePicture;
     }
 
-    public function setGender(string $gender): void { // New setter for gender
-        $this->gender = $gender;
-    }
-
-    public function setBirthday(string $birthday): void { // New setter for birthday
-        $this->birthday = $birthday;
-    }
-
-    public function setPropertyType(?string $propertyType): void {
-        $this->propertyType = $propertyType;
-    }
-
-    public function setPreferredLanguage(?string $preferredLanguage): void {
-        $this->preferredLanguage = $preferredLanguage;
-    }
-
-    public function setBio(?string $bio): void {
-        $this->bio = $bio;
-    }
-
-    public function setLocation(?string $location): void {
-        $this->location = $location;
-    }
-
-    public function setSkills(?string $skills): void {
-        $this->skills = $skills;
-    }
-
-    public function setLanguageSpoken(?string $languageSpoken): void {
-        $this->languageSpoken = $languageSpoken;
-    }
-
     // New getters
     public function getUserID(): string {
         return $this->userID;
@@ -132,38 +95,6 @@ class User {
 
     public function getProfilePicture(): string {
         return $this->profilePicture;
-    }
-
-    public function getGender(): string { // New getter for gender
-        return $this->gender;
-    }
-
-    public function getBirthday(): string { // New getter for birthday
-        return $this->birthday;
-    }
-
-    public function getPropertyType(): ?string {
-        return $this->propertyType;
-    }
-
-    public function getPreferredLanguage(): ?string {
-        return $this->preferredLanguage;
-    }
-
-    public function getBio(): ?string {
-        return $this->bio;
-    }
-
-    public function getLocation(): ?string {
-        return $this->location;
-    }
-
-    public function getSkills(): ?string {
-        return $this->skills;
-    }
-
-    public function getLanguageSpoken(): ?string {
-        return $this->languageSpoken;
     }
 }
 ?>

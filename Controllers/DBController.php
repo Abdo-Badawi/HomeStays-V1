@@ -1,11 +1,10 @@
 <?php
     class DBController {
-        public $conn; // Ensure this property is public so it can be accessed in AuthController
-
         private $dbHost = "localhost";
         private $dbUser = "root";
         private $dbPass = "";
         private $dbName = "homestay";
+        private $conn;
 
         public function openConnection() {
              $this->conn = new mysqli($this->dbHost, $this->dbUser, $this->dbPass, $this->dbName);
@@ -22,9 +21,6 @@
                 $this->conn->close();
                 $this->conn = null; // Clear the connection property
             }
-        }
-        public function getLastError(): string {
-            return $this->conn->error ?? 'Unknown error';
         }
         
         // Original select method (kept for potential existing usage, but less safe)

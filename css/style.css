@@ -1271,22 +1271,3 @@ div.carousel-caption {
     background-color: #13357b !important;  
     transition: 1s  
 }
-
-.error-message {
-    font-size: 0.875rem;
-    color: #dc3545;
-}
-
-.role-selector {
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.role-selector:hover {
-    transform: translateY(-5px);
-}
-
-.role-selector.selected {
-    border: 2px solid var(--bs-primary) !important;
-    background-color: rgba(var(--bs-primary-rgb), 0.1);
-}
