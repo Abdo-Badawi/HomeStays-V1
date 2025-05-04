@@ -7,7 +7,7 @@ if ($conn->connect_error) {
 
 $userId = intval($_GET['user_id'] ?? 0);
 
-$stmt = $conn->prepare("SELECT profile_picture FROM users WHERE id = ?");
+$stmt = $conn->prepare("SELECT profile_picture FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $stmt->store_result();

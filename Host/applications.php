@@ -78,9 +78,9 @@ if ($hostID) {
                                 <div class="col-md-3">
                                     <select class="form-select" id="statusFilter">
                                         <option selected>Status</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="cancelled">Cancelled</option>
+                                        <option value="accepted">Accepted</option>
                                         <option value="rejected">Rejected</option>
+                                        <option value="pending">Pending</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">

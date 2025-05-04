@@ -51,7 +51,7 @@ if (!$userData) {
                         <!-- Profile Picture Upload -->
                         <form action="upload_profile_pic.php" method="post" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
-                                <img src="../Controllers/GetProfileImg.php?user_id=<?= $userData['id'] ?>"
+                                <img src="../Controllers/GetProfileImg.php?user_id=<?= $userData['host_id'] ?>"
                                      class="rounded-circle mb-3 img-fluid"
                                      style="width: 150px; height: 150px; object-fit: cover;"
                                      alt="Profile Picture">

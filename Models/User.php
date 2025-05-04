@@ -12,7 +12,10 @@ class User {
     private string $lastName;
     private string $phoneNumber;
     private string $profilePicture; // Assuming this is a file path or URL
-
+    private string $createdAt; // Assuming this is a timestamp
+    private string $gender;
+    private string $dateOfBirth; // Assuming this is a date string
+    
     public function __construct(string $email, string $password) {
         $this->email = $email;
         $this->password = $password;
