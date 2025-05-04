@@ -4,7 +4,7 @@ use Models\User;
 include_once '../Controllers/DBController.php';
 
 class AuthController {
-    protected $db;
+    public $db;
     
     public function login(User $user){
         session_start(); // Always start the session first
@@ -38,6 +38,25 @@ class AuthController {
             echo "Connection failed";
             return false;
         }
+    }
+
+    public function logout(){
+        session_start(); // Always start the session first
+        
+        // Unset all session variables
+        $_SESSION = array();
+        
+        // Destroy the session cookie
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', time() - 3600, '/');
+        }
+        
+        // Destroy the session
+        session_destroy();
+        
+        // Redirect to login page
+        header("Location: login.php");
+        exit();
     }
 }
 ?>

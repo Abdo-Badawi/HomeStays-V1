@@ -137,8 +137,14 @@ if (!$userData) {
                                 </form>
                             </div>
                         </div>
-                        <div class="text-end mt-4">
-                            <button class="btn btn-primary" onclick="window.location.href='edit_profile.php'">Edit Profile</button>
+                        <!-- Example in HTML or PHP page -->
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
+
+                            <form method="post" action="../Common/logout.php" style="text-align: right; margin-top: 20px;">
+                                <button type="submit" class="btn btn-danger">Logout</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
