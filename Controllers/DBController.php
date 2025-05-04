@@ -5,6 +5,7 @@
         private $dbPass = "";
         private $dbName = "homestay";
         private $conn;
+       
 
         public function openConnection() {
              $this->conn = new mysqli($this->dbHost, $this->dbUser, $this->dbPass, $this->dbName);
